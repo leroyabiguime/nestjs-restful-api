@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Delete, Post, Body, HttpCode, Query, Param } from '@nestjs/common';
+import { Controller, Get, Put, Delete, Post, Body, HttpCode, Query, Param, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateCarDto } from './dto/createCarDto';
 import { SwaggerModule, DocumentBuilder, ApiTags, ApiParam } from '@nestjs/swagger';
 import { Car } from 'src/interfaces/cars.interface';
@@ -15,7 +15,12 @@ export class CarsController {
 
     @Post()
     create(@Body() createCarDto: CreateCarDto): Promise<Car>{
-        return this.carsService.createCars(createCarDto);
+        try {
+            return this.carsService.createCars(createCarDto);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.UNPROCESSABLE_ENTITY);
+            
+        }
     }
     
     @Get(':id')

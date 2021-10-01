@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -7,6 +7,8 @@ import { User } from './database/entity/user.entity';
 import { UsersModule } from './users/users.module';
 import { Car } from './database/entity/car.entity';
 import { CarsModule } from './cars/cars.module';
+import { LoggerMiddleware } from './logger.middleware';
+
 
 @Module({
   imports: [
@@ -26,5 +28,10 @@ import { CarsModule } from './cars/cars.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer ){
+    consumer
+    .apply(LoggerMiddleware)
+    .forRoutes({path:'cars', method: RequestMethod.GET})
+  }
 }
