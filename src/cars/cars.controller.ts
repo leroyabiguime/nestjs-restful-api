@@ -1,6 +1,8 @@
 import { Controller, Get, Put, Delete, Post, Body } from '@nestjs/common';
 import { CreateCarDto } from './dto/createCarDto';
+import { SwaggerModule, DocumentBuilder, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Cars')
 @Controller('cars')
 export class CarsController {
     @Get()
