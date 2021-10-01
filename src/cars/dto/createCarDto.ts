@@ -9,4 +9,10 @@ export class CreateCarDto {
 
     @ApiProperty()
     plaque: string
+
+    @ApiProperty()
+    dateArrived: Date
+
+
+
 }
