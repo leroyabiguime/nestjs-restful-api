@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entity/user.entity';
+import { User } from './database/entity/user.entity';
 import { UsersModule } from './users/users.module';
-import { Car } from './entity/car.entity';
+import { Car } from './database/entity/car.entity';
 import { CarsModule } from './cars/cars.module';
 
 @Module({
@@ -19,10 +19,9 @@ import { CarsModule } from './cars/cars.module';
       database: 'restful',
       entities: [User, Car],
       synchronize: true
-
     }),
     UsersModule,
-    CarsModule
+    CarsModule,
     ],
   controllers: [AppController],
   providers: [AppService],
