@@ -19,7 +19,7 @@ export class CarsController {
     }
     
     @Get(':id')
-    async getOneCars(@Param('id') id: number): Promise<Car[]>{  
+    async getOneCars(@Param('id') id: number): Promise<Car>{  
         return await this.carsService.findOneCars(id);
     }
   

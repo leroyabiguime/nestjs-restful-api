@@ -13,16 +13,12 @@ export class CarsService {
         return this.carRepository.find()
     }
 
-    @Post()
-  async createCars(createCarDto: CreateCarDto){
+    async createCars(createCarDto: CreateCarDto){
       return this.carRepository.save(createCarDto);
     }
 
-    findOneCars(id: number): Promise<Car[]> {
-        return this.carRepository.find({
-            select: ["id","marque","plaque","dateArrived"],
-            where: [{"id": id}]
-    });
+    findOneCars(id: number): Promise<Car> {
+    return this.carRepository.findOne(id);
     }
 
     async updateCars(id: number,createCarDto: CreateCarDto) {
