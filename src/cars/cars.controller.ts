@@ -9,8 +9,14 @@ import { CarsService } from './cars.service';
 export class CarsController {
     constructor(private carsService: CarsService){}
     @Get()
-   async getAllCars(): Promise<Car[]>{
-        return await this.carsService.findAllCars();
+    async getAllCars(): Promise<Car[]>{
+        try {
+        return await this.carsService.findAllCars();    
+        } catch (error) {
+            throw new HttpException("Forbidden", HttpStatus.FORBIDDEN);
+            
+        }
+        
     }
 
     @Post()
